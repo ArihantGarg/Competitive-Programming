@@ -5,7 +5,7 @@ using namespace std;
 int MinPalindromePartition(string s)
 {
     int n=s.size();
-    int table[n][n];
+    bool table[n][n];
     int partition[n];
 
     for(int i=0;i<n;i++)
