@@ -2,7 +2,7 @@
 using namespace std;
 
 
-int dp[1000][1000];
+int dp[100000];
 
 
 int MaxKnapsack(int volume,int n,int vol[],int cost[])
@@ -10,16 +10,16 @@ int MaxKnapsack(int volume,int n,int vol[],int cost[])
     if(volume==0 || n==0)
         return 0;
 
-    if(dp[volume][n]!=-1)
+    if(dp[volume]!=-1)
     {
         ;//Nothing
     }
     else if(vol[n-1]>volume)
-        dp[volume][n]=MaxKnapsack(volume,n-1,vol,cost);
+        dp[volume]=MaxKnapsack(volume,n-1,vol,cost);
     else
-        dp[volume][n]=max(MaxKnapsack(volume,n-1,vol,cost),cost[n-1]+MaxKnapsack(volume-vol[n-1],n-1,vol,cost));
+        dp[volume]=max(MaxKnapsack(volume,n-1,vol,cost),cost[n-1]+MaxKnapsack(volume-vol[n-1],n-1,vol,cost));
 
-    return dp[volume][n];
+    return dp[volume];
 }
 
 
@@ -40,11 +40,9 @@ int main()
         cin>>cost[i];
 
     for(int i=0;i<=volume;i++)
-        for(int j=0;j<=n;j++)
-            dp[i][j]=-1;
+            dp[i]=-1;
 
     cout<<MaxKnapsack(volume,n,vol,cost);
-
 
 
     return 0;
