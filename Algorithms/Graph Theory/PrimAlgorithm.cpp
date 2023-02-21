@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-    // Input - Assuming Weighted directed graph
+    // Input - Assuming Weighted undirected graph
     int numVertex;
     cin>>numVertex;
 
@@ -24,51 +24,41 @@ int main()
 
     // Prim's Algorithm
 
-    priority_queue< pi,vector<pi>,greater<pi> > pq; //Minimum Binary Heap
-
-    int startvertex=0;//We can take any start vertex
-
-    int dist[numVertex],parent[numVertex];
+    priority_queue<pi,vector<pi>,greater<pi>> q;
+    int parent[numVertex],visited[numVertex],key[numVertex];
 
     for(int i=0;i<numVertex;i++)
     {
-        dist[i]=1e9;
-        parent[i]=NULL;
+        key[i]=1e9;
+        visited[i]=0;
     }
 
-    dist[0]=0;
+    q.push({0,0});
+    key[0]=0;
 
-    pq.push({dist[0],0});
-
-    while(!pq.empty())
+    while(!q.empty())
     {
-        int u=pq.top().second;
-        int distance=pq.top().first;
+        pi u=q.top();
+        q.pop();
 
-        pq.pop();
+        if(visited[u.second]==1)
+            continue;
+        visited[u.second]=1;
 
-        if(dist[u]==distance)
+        for(auto v:adj[u.second])
         {
-            for(auto x:adj[u])
+            if(visited[v.first]==0 && v.second < key[v.first])
             {
-                if(dist[x.first]>dist[u]+x.second)
-                {
-                    dist[x.first]=dist[u]+x.second;
-                    parent[x.first]=u;
-
-                    pq.push({dist[x.first],x.first});
-                }
+                key[v.first]=v.second;
+                parent[v.first]=u.second;
+                q.push({v.second,v.first});
             }
         }
     }
 
-    //Printing MST
-
-    cout<<"\nMST Edges\n";
-
     for(int i=1;i<numVertex;i++)
     {
-        cout<<parent[i]<<" - "<<i<<"\n";
+        cout<<i<<" "<<parent[i]<<"\n";
     }
 
     return 0;
