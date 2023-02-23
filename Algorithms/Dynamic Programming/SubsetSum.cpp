@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int table[100][10000];
+int table[100000];
 
 bool isSubsetSum(int a[],int n,int sum)
 {
@@ -11,16 +11,16 @@ bool isSubsetSum(int a[],int n,int sum)
     if(n<=0)
         return 0;
 
-    if(table[n][sum]!=-1)
+    if(table[sum]!=-1)
     {
         ;//Nothing
     }
     else if(a[n-1]>sum)
-        table[n][sum]=isSubsetSum(a,n-1,sum);
+        table[sum]=isSubsetSum(a,n-1,sum);
     else
-        table[n][sum]=isSubsetSum(a,n-1,sum) || isSubsetSum(a,n-1,sum-a[n-1]);
+        table[sum]=isSubsetSum(a,n-1,sum) || isSubsetSum(a,n-1,sum-a[n-1]);
 
-    return table[n][sum];
+    return table[sum];
 }
 
 int main()
@@ -35,9 +35,9 @@ int main()
     int sum;
     cin>>sum;
 
-    for(int i=1;i<=n;i++)
-        for(int j=0;j<=sum;j++) 
-            table[i][j]=-1;
+    
+    for(int i=0;i<=sum;i++) 
+        table[i]=-1;
 
     cout<<isSubsetSum(a,n,sum);
 
