@@ -29,7 +29,7 @@ int main()
     cout<<"\nEnter starting vertex: ";
     cin>>startVertex;
 
-    //Djistra
+    //Djikstra
 
     int dist[numVertex],parent[numVertex];
 
