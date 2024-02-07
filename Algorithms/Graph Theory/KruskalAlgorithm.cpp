@@ -10,9 +10,12 @@ void makeset(vector<pi> &a,int x)
 
 int find(vector<pi> &a,int x)
 {
-    while(x!=a[x].first)
-        x=a[x].first;
-    return x;
+    if(x==a[x].first)
+        return x;
+
+    a[x].first=find(a,a[x].first);
+
+    return a[x].first;
 }
 
 void unionset(vector<pi> &a,int x,int y)
