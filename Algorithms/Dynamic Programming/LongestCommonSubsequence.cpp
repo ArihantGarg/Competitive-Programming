@@ -29,16 +29,16 @@ int main()
 
     while(i>0 && j>0)
     {
-        if(dp[i][j]==dp[i-1][j])
-            i--;
-        else if(dp[i][j]==dp[i][j-1])
-            j--;
-        else
+        if(s1[i-1]==s2[j-1])
         {
             i--;
             j--;
             ans.push_back(s1[i]);
         }
+        else if(dp[i][j]==dp[i-1][j])
+            i--;
+        else if(dp[i][j]==dp[i][j-1])
+            j--;
     }
 
     reverse(ans.begin(),ans.end());

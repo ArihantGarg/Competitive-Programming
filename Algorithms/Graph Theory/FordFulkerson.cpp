@@ -1,6 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// Edmond's Karp Algorithm (BFS version of Ford Fulkerson)
+// O (V*E*(V+E)) time complexity -> O(VE^2) 
+
 int numVertex;
 int numEdge;
 int graph[1000][1000]={};
@@ -69,10 +72,13 @@ int ford(int s,int t)
 
 int main()
 {
+    cout<<"Enter number of vertices : ";
     cin>>numVertex;
 
+    cout<<"Enter number of edges : ";
     cin>>numEdge;
 
+    cout<<"Enter all edges : ";
     for(int i=0;i<numEdge;i++)
     {
         int a,b,weight;
@@ -82,11 +88,12 @@ int main()
         rgraph[a][b]=weight;
     }
 
+    cout<<"Enter indices of start and end vertex : ";
     int start,end;
 
     cin>>start>>end;
 
-    cout<<ford(start,end);
+    cout<<"\nMaximum possible flow is : "<<ford(start,end);
 
 
     return 0;
