@@ -1,16 +1,11 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int main()
+// Time complexity O(n+m)
+
+vector<int> kmp(string txt,string pat)
 {
-    string txt,pat;
-    cout<<"Enter text string : ";
-    cin>>txt;
-
-    cout<<"Enter pattern string : ";
-    cin>>pat;
-
-    vector<int> ans;
+    vector<int> matchingIndices;
 
     int n=txt.size(),m=pat.size();
 
@@ -47,10 +42,25 @@ int main()
         
         if(q==m)
         {
-            ans.push_back(i-m+1);
+            matchingIndices.push_back(i-m+1);
             q=prefix[q-1];
         }
     }
+
+    return matchingIndices;
+}
+
+
+int main()
+{
+    string txt,pat;
+    cout<<"Enter text string : ";
+    cin>>txt;
+
+    cout<<"Enter pattern string : ";
+    cin>>pat;
+
+    vector<int> ans;
 
     if(ans.size()==0)
         cout<<"\nNo pattern found";
